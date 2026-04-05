@@ -53,6 +53,10 @@ describe(`Function 'validateEmail':`, () => {
     expect(validateEmail('test838@gmail.com.')).toBe(false);
   });
 
+  it(`should return false if domain contains underscore`, () => {
+    expect(validateEmail('test@gmail_com')).toBe(false);
+  });
+
   it(`should return false for empty string`, () => {
     expect(validateEmail('')).toBe(false);
   });
