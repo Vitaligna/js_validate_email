@@ -17,7 +17,6 @@ describe(`Function 'validateEmail':`, () => {
     expect(validateEmail('t@q.c')).toBe(true);
     expect(validateEmail('user_123@gmail.com')).toBe(true);
     expect(validateEmail('my-test.email@yahoo.com')).toBe(true);
-    expect(validateEmail('test838@gmail.com.')).toBe(true);
   });
 
   it(`should return false if email has no @ symbol`, () => {
@@ -32,6 +31,14 @@ describe(`Function 'validateEmail':`, () => {
     expect(validateEmail('.test@gmail.com')).toBe(false);
   });
 
+  it(`should return false if personal part ends with dot`, () => {
+    expect(validateEmail('test.@gmail.com')).toBe(false);
+  });
+
+  it(`should return false if domain starts with dot`, () => {
+    expect(validateEmail('test@.gmail.com')).toBe(false);
+  });
+
   it(`should return false if email contains double dots in personal part`, () => {
     expect(validateEmail('te..st@gmail.com')).toBe(false);
   });
@@ -40,6 +47,10 @@ describe(`Function 'validateEmail':`, () => {
     expect(validateEmail('test!@gmail.com')).toBe(false);
     expect(validateEmail('test$@gmail.com')).toBe(false);
     expect(validateEmail('test%@gmail.com')).toBe(false);
+  });
+
+  it(`should return false if domain ends with dot`, () => {
+    expect(validateEmail('test838@gmail.com.')).toBe(false);
   });
 
   it(`should return false for empty string`, () => {
